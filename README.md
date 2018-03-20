@@ -7,10 +7,15 @@ A Point of Sales system using NFC technology to provide a superior shopping expe
 ### Ahmed Moselhi -
 ### Amruth HB -
 ### Aryan Arora -
-### David Li -
+### David Li - Product Manager, Solutions Developer
 ### Ivy Deng -
 ### Jason Huang - Mobile App Developer
 
 ## Technology
-[//]: # (Someone fill this out)
+React Native
+Nativebase UI Kit(s)
+Expo.io XDE
+Expo Mobile Previewer
+Invision Studio
+
 
