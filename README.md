@@ -12,10 +12,10 @@ A Point of Sales system using NFC technology to provide a superior shopping expe
 ### Jason Huang - Mobile App Developer
 
 ## Technology
-React Native
-Nativebase UI Kit(s)
-Expo.io XDE
-Expo Mobile Previewer
-Invision Studio
+## React Native
+## Nativebase UI Kit(s)
+## Expo.io XDE
+## Expo Mobile Previewer
+## Invision Studio
 
 
