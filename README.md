@@ -14,8 +14,8 @@ A Point of Sales system using NFC technology to provide a superior shopping expe
 ## Technology
 - React Native
 - Nativebase UI Kit(s)
-- Expo.io XDE
-- Expo Mobile Previewer
+- react-native-nfc-manager
 - Invision Studio
+- Github
 
 
