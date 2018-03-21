@@ -9,7 +9,7 @@ A Point of Sales system using NFC technology to provide a superior shopping expe
 ### Aryan Arora -
 ### David Li - Product Manager, Solutions Architect
 ### Ivy Deng -
-### Jason Huang - Mobile App Developer
+### Jason Huang - Mobile App Developer, UI Designer
 
 ## Technology
 - React Native
