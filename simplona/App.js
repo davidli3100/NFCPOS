@@ -15,7 +15,7 @@ class BaseInterface extends Component {
   renderSelectedTab () {
     switch (this.state.selectedTab) {
     case 'home':
-    return (<Selling{...this.props}/>);
+    return (<Home{...this.props}/>);
     break;
     case 'deals':
     return (<Deals{...this.props}/>);
@@ -79,7 +79,7 @@ class BaseInterface extends Component {
   }
 }
 
-export default SellerDashboard;
+export default BaseInterface;
 /*
         <Footer>
           <FooterTab>
