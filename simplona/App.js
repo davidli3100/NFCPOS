@@ -50,8 +50,8 @@ class App extends Component {
         <StyleProvider style={getTheme(material)}>        
           <Footer>
             <FooterTab>
-              <Button active={this.setState.selectedTab==='home'} 
-                onPress={() => this.setState({selectedTab: 'selling'})}>
+              <Button onPress={() => this.setState({selectedTab: 'home'})}
+                style={[this.state.active && stypes.background]}>
                 <Icon name="home" />
               </Button>
 

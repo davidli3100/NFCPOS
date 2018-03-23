@@ -48,7 +48,7 @@ class App extends Component {
                     <Text>{`Is NFC enabled (Android only)? ${enabled}`}</Text>
 
                     <TouchableOpacity style={{ marginTop: 20 }} onPress={this._startDetection}>
-                        <Text style={{ color: 'blue' }}>Start Tag Detection</Text>
+                        <Text style={{ color: 'blue' }}>Detect Tags</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{ marginTop: 20 }} onPress={this._stopDetection}>
