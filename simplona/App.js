@@ -11,7 +11,7 @@ import Profile from './pages/profile'; // Profile screen
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 
-class BaseInterface extends Component {
+class App extends Component {
   renderSelectedTab () {
     switch (this.state.selectedTab) {
     case 'home':
@@ -79,7 +79,7 @@ class BaseInterface extends Component {
   }
 }
 
-export default BaseInterface;
+export default App;
 /*
         <Footer>
           <FooterTab>
