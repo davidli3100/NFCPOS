@@ -1,23 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import { getTagId, readTag, writeTag } from 'nfc-react-native'
-
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Alert,
-  Button,
-  DeviceEventEmitter
+    View,
+    Text,
+    Button,
+    Platform,
+    TouchableOpacity,
+    Linking,
+    TextInput,
+    ScrollView,
 } from 'react-native';
-<<<<<<< HEAD
-=======
 import NfcManager, {NdefParser} from 'react-native-nfc-manager';
 
 class App extends Component {
@@ -27,7 +18,7 @@ class App extends Component {
             supported: true,
             enabled: false,
             isWriting: false,
-            urlToWrite: 'google.com',
+            upcNumber: '012546011112',
             tag: {},
         }
     }
@@ -49,7 +40,7 @@ class App extends Component {
     }
 
     render() {
-        let { supported, enabled, tag, isWriting, urlToWrite} = this.state;
+        let { supported, enabled, tag, isWriting, upcNumber} = this.state;
         return (
             <ScrollView style={{flex: 1}}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -76,11 +67,10 @@ class App extends Component {
                         <View style={{padding: 10, marginTop: 20, backgroundColor: '#e0e0e0'}}>
                             <Text>(android) Write NDEF Test</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text>http://www.</Text>
                                 <TextInput
                                     style={{width: 200}}
-                                    value={urlToWrite}
-                                    onChangeText={urlToWrite => this.setState({ urlToWrite })}
+                                    value={upcNumber}
+                                    onChangeText={upcNumber => this.setState({ upcNumber })}
                                 />
                             </View>
 
@@ -126,12 +116,12 @@ class App extends Component {
             return result;
         }
 
-        let {isWriting, urlToWrite} = this.state;
+        let {isWriting, upcNumber} = this.state;
         if (isWriting) {
             return;
         }
 
-        const urlBytes = strToBytes(urlToWrite);
+        const urlBytes = strToBytes(upcNumber);
         const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x55, 0x01];
         const bytes = [...headerBytes, ...urlBytes];
 
@@ -252,93 +242,18 @@ class App extends Component {
                 })
         }
     }
->>>>>>> parent of 82628c2... not working, pre-new nfc lib
 
-export default class NfcSample extends Component {
-  readTagId() {
-    getTagId()
-  }
-
-  readTagData() {
-    readTag([
-      { sector: 1, blocks: [1,2], clave: 'FFFFFFFFFFFF', keyType: 'A' },
-      { sector: 2, blocks: [0,1,2], clave: 'FFFFFFFFFFFF', keyType: 'A' },
-      { sector: 3, blocks: [0], clave: 'FFFFFFFFFFFF', keyType: 'A' }
-    ])
-  }
-
-  writeTagData() {
-    writeTag([{ sector: 1, blocks: [ 
-    { index: 1, data: [15,15,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,15,15] },
-    { index: 2, data: [15,15,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,15,15] } ],
-      clave: 'FFFFFFFFFFFF', keyType: 'A' },
-      { sector: 2, blocks: [ 
-    { index: 0, data: [15,15,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,15,15] },
-    { index: 1, data: [15,15,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,15,15] },
-    { index: 2, data: [15,15,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,15,15] } ],
-      clave: 'FFFFFFFFFFFF', keyType: 'A' },
-    { sector: 3, blocks: [ 
-    { index: 0, data: [15,15,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,15,15] } ],
-      clave: 'FFFFFFFFFFFF', keyType: 'A' },
-      ], 1148002313)
-  }
-
-  componentDidMount() {
-    DeviceEventEmitter.addListener('onTagError', function (e) {
-        console.log('error', e)
-        Alert.alert(JSON.stringify(e))
-    })
-
-    DeviceEventEmitter.addListener('onTagDetected', function (e) {
-        Alert.alert(JSON.stringify(e))
-    })
-
-    DeviceEventEmitter.addListener('onTagRead', (e) => {
-        console.log('reading', e)
-        Alert.alert(JSON.stringify(e))
-    })
-
-    DeviceEventEmitter.addListener('onTagWrite', (e) => {
-        console.log('writing', e)
-        Alert.alert(JSON.stringify(e))
-    })
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Button
-          onPress={this.readTagId}
-          title="Get id of Tag"
-        />
-        <Button
-          onPress={this.readTagData}
-          title="Get sectors of a Tag"
-        />
-        <Button
-          onPress={this.writeTagData}
-          title="Write sectors of a Tag"
-        />
-      </View>
-    );
-  }
+    _parseUri = (tag) => {
+        if (tag.ndefMessage) {
+            let result = NdefParser.parseUri(tag.ndefMessage[0]),
+                uri = result && result.uri;
+            if (uri) {
+                console.log('parseUri: ' + uri);
+                return uri;
+            }
+        }
+        return null;
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
-});
-
-AppRegistry.registerComponent('NfcSample', () => NfcSample);
+export default App;
