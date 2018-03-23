@@ -1,6 +1,4 @@
 rootProject.name = 'simplona'
-include ':nfc-react-native'
-project(':nfc-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/nfc-react-native/android')
 include ':react-native-nfc-manager'
 project(':react-native-nfc-manager').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-nfc-manager/android')
 include ':react-native-nfc-manager'
