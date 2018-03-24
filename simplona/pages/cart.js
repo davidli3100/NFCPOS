@@ -40,36 +40,59 @@ export default class AnatomyExample extends Component {
               </Left>
             </CardItem>
          
-
-               for (let i = 0; i < upc.length; i++) { 
+/* ok so basically we want the upc to be an active service here, when a upc is added it reads upc and then if upc is somethihng
+like gum it'll automatically add a gum card item to descriptors/
+            
                 if (upc == "gum") {
+                  product_info.push(
+                    <CardItem>
+                      <Left>
+                      <Thumbnail large source={{uri: './assets/gum.png'}} />
+                      </Left>
+                    </CardItem>
                   <CardItem>
                   <Body>
                 <Text>Gum</Text>
                 <Text note>$1.99</Text>
                 </Body>
                 </CardItem>
+                  )
                  }
 
                 if (upc == "mouse") {
+                  product_info.push(
+                    <CardItem>
+                    <Left>
+                    <Thumbnail large source={{uri: './assets/mouse.png'}} />
+                    </Left>
+                  </CardItem>
                   <CardItem>
                   <Body>
                 <Text>Mouse</Text>
                 <Text note>$24.99</Text>
                 </Body>
                 </CardItem>
+                  )
                 }
 
                 if (upc == "paper") {
+                  product_info.push(
+                    <CardItem>
+                    <Left>
+                    <Thumbnail large source={{uri: './assets/paper.png'}} />
+                    </Left>
+                  </CardItem>
                   <CardItem>
                   <Body>
                 <Text>Paper</Text>
                 <Text note>$4.99</Text>
                 </Body>
                 </CardItem>
+                  )
                 }
-              }
-              { descriptors }
+              
+              {product_info}
+     
     
           </Text>
         </Content>
