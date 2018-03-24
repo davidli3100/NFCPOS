@@ -41,7 +41,7 @@ export default class AnatomyExample extends Component {
             </CardItem>
          
 /* ok so basically we want the upc to be an active service here, when a upc is added it reads upc and then if upc is somethihng
-like gum it'll automatically add a gum card item to descriptors/
+like gum it'll automatically add a gum card item to descriptors */
             
                 if (upc == "gum") {
                   product_info.push(
