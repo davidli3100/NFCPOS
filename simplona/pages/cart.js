@@ -6,6 +6,15 @@ import NfcManager, {NdefParser} from 'react-native-nfc-manager';
 import './nfc.js';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 export default class AnatomyExample extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        supported: true,
+        enabled: false,
+        tag: {},
+        upc: {}
+    }
+}
   componentDidMount() {
     NfcManager.isSupported()
         .then(supported => {
@@ -17,6 +26,7 @@ export default class AnatomyExample extends Component {
   }
   
   render() {
+    this._startNfc;
     this._startDetection
     return (
       <Container>
@@ -32,7 +42,11 @@ export default class AnatomyExample extends Component {
           <Right />
         </Header>
         <Content>
+          <TouchableOpacity style={{ marginTop: 20 }} onPress={this._startDetection}>
+            <Text style={{ color: 'blue' }}>Start Tag Detection</Text>
+          </TouchableOpacity>
           <Text>
+            /*
             <CardItem>
               <Left>
                 if(upc == "gum") {
@@ -59,12 +73,12 @@ like gum it'll automatically add a gum card item to descriptors */
                       <Thumbnail large source={{uri: './assets/gum.jpg'}} />
                       </Left>
                     </CardItem>
-                  <CardItem>
-                  <Body>
-                <Text>Gum</Text>
-                <Text note>$1.99</Text>
-                </Body>
-                </CardItem>
+                    <CardItem>
+                      <Body>
+                        <Text>Gum</Text>
+                        <Text note>$1.99</Text>
+                      </Body>
+                    </CardItem>
                   )
                  }
 
@@ -102,8 +116,11 @@ like gum it'll automatically add a gum card item to descriptors */
               
               {product_info}
      
-    
+    */
           </Text>
+
+          <Text style={{ marginTop: 20 }}>{`Current tag JSON: ${JSON.stringify(tag)}`}</Text>
+          <Text style={{ marginTop: 20 }}>{`UPC: ${JSON.stringify(upc)}`}</Text>
         </Content>
         <Footer>
           <FooterTab>
@@ -175,13 +192,7 @@ like gum it'll automatically add a gum card item to descriptors */
 _onTagDiscovered = tag => {
     console.log('Tag Discovered', tag);
     this.setState({ tag });
-    let upc = this._parseText(tag);
-    if (url) {
-        Linking.openURL(url)
-            .catch(err => {
-                console.warn(err);
-            })
-    }
+    upc = this._parseText(tag);
 }
 
 _startDetection = () => {
