@@ -20,50 +20,49 @@ import Paper from './paper';
 import None from './blank';
 
 export default class AnatomyExample extends Component {
-    renderSelectedApp1 () {
-        switch (this.state.selectedApp1) {
-          case 'gum':
-          return (<Mouse{...this.props}/>);
-          break;
-          case 'mouse':
-          return (<Mouse{...this.props}/>);
-          break;
-          case 'paper':
-          return (<Paper{...this.props}/>);
-          break;
-          case 'none':
-          return (<None{...this.props}/>);
-        }
-      }
-    renderSelectedApp2 () {
-        switch (this.state.selectedApp2) {
-          case 'gum':
-          return (<Mouse{...this.props}/>);
-          break;
-          case 'mouse':
-          return (<Mouse{...this.props}/>);
-          break;
-          case 'paper':
-          return (<Paper{...this.props}/>);
-          break;
-          case 'none':
-          return (<None{...this.props}/>);
-        }
-      }
-    renderSelectedApp3 () {
-        switch (this.state.selectedApp3) {
-        case 'gum':
-        return (<Mouse{...this.props}/>);
-        break;
-        case 'mouse':
-        return (<Mouse{...this.props}/>);
-        break;
-        case 'paper':
-        return (<Paper{...this.props}/>);
-        break;
-        case 'none':
-        return (<None{...this.props}/>);
-        }
+  renderSelectedApp1 () {
+    switch (this.state.selectedApp1) {
+      case 'gum':
+      return (<Mouse{...this.props}/>);
+      break;
+      case 'mouse':
+      return (<Mouse{...this.props}/>);
+      break;
+      case 'paper':
+      return (<Paper{...this.props}/>);
+      break;
+      case 'none':
+      return (<None{...this.props}/>);
+    }
+  }
+  renderSelectedApp2 () {
+    switch (this.state.selectedApp2) {
+      case 'gum':
+      return (<Mouse{...this.props}/>);
+      break;
+      case 'mouse':
+      return (<Mouse{...this.props}/>);
+      break;
+      case 'paper':
+      return (<Paper{...this.props}/>);
+      break;
+      case 'none':
+      return (<None{...this.props}/>);
+    }
+  }
+  renderSelectedApp3 () {
+    switch (this.state.selectedApp3) {
+      case 'gum':
+      return (<Mouse{...this.props}/>);
+      break;
+      case 'mouse':
+      return (<Mouse{...this.props}/>);
+      break;
+      case 'paper':
+      return (<Paper{...this.props}/>);
+      break;
+      case 'none':
+      return (<None{...this.props}/>);
     }
   }
 
@@ -89,9 +88,9 @@ export default class AnatomyExample extends Component {
   
   
   render() {
-    let { supported, enabled, tag, isWriting, upc, selectedApp1, selectedApp2, selectedApp3} = this.state;
+    let { supported, enabled, tag, isWriting, upc } = this.state;
     this._startNfc;
-    this._startDetection;
+    this._startDetection
     return (
       <Container>
         <Header>
@@ -109,12 +108,10 @@ export default class AnatomyExample extends Component {
           <Body>
           {this.renderSelectedApp1()}
           {this.renderSelectedApp2()}
-          {this.renderSelectedApp3()}
-          
-            <Button full onPress={this._startDetection}>
+          {this.renderSelectedApp3()} 
+          <Button full onPress={this._startDetection}>
                     <Text>Start Tag Detection</Text>
-            </Button>
-            
+            </Button>           
           </Body>
         </Content>
       </Container>
@@ -182,7 +179,7 @@ _onTagDiscovered = tag => {
     this.setState({ tag });
     upc = this._parseUri(tag);
     console.log('UPC', upc )
-    if (selectedApp1 != 'none') {
+    if (this.selectedApp1 != 'none') {
     this.setState({selectedApp1: upc});
     }
     else if (selectedApp2 != 'none') {
