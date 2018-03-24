@@ -9,7 +9,7 @@ import {
     TextInput,
     ScrollView,
 } from 'react-native';
-import NfcManager, {NdefParser} from 'react-native-nfc-manager';
+import NfcManager, {NdefParser} from 'react-native-nfc-manager'
 
 class App extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class App extends Component {
             supported: true,
             enabled: false,
             isWriting: false,
-            urlToWrite: 'google.com',
+            urlToWrite: '012546011112',
             tag: {},
         }
     }
@@ -48,7 +48,7 @@ class App extends Component {
                     <Text>{`Is NFC enabled (Android only)? ${enabled}`}</Text>
 
                     <TouchableOpacity style={{ marginTop: 20 }} onPress={this._startDetection}>
-                        <Text style={{ color: 'blue' }}>Start Tag Detection</Text>
+                        <Text style={{ color: 'blue' }}>Detect Tags</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{ marginTop: 20 }} onPress={this._stopDetection}>
@@ -67,7 +67,6 @@ class App extends Component {
                         <View style={{padding: 10, marginTop: 20, backgroundColor: '#e0e0e0'}}>
                             <Text>(android) Write NDEF Test</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text>http://www.</Text>
                                 <TextInput
                                     style={{width: 200}}
                                     value={urlToWrite}
@@ -123,7 +122,7 @@ class App extends Component {
         }
 
         const urlBytes = strToBytes(urlToWrite);
-        const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x55, 0x01];
+        const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x55, 0x00];
         const bytes = [...headerBytes, ...urlBytes];
 
         this.setState({isWriting: true});
@@ -254,7 +253,7 @@ class App extends Component {
             }
         }
         return null;
-    }
+      }
 }
 
 export default App;
