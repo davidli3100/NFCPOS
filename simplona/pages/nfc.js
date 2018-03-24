@@ -200,7 +200,7 @@ class App extends Component {
         this.setState({ tag });
         let upc = tag.toString(2);
         if (upc) {
-            // Do stuffs
+            console.log("upc" + upc);
         }
     }
 
