@@ -121,9 +121,9 @@ class App extends Component {
             return;
         }
 
-        const urlBytes = strToBytes(upcNumber);
-        const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x54, 0x00];
-        const bytes = [...headerBytes, ...urlBytes];
+        const upcBytes = strToBytes(upcNumber);
+        const headerBytes = [0xD1, 0x01, (upcBytes.length + 1), 0x54, 0x00];
+        const bytes = [...headerBytes, ...upcBytes];
 
         this.setState({isWriting: true});
         NfcManager.requestNdefWrite(bytes)
@@ -198,12 +198,9 @@ class App extends Component {
     _onTagDiscovered = tag => {
         console.log('Tag Discovered', tag);
         this.setState({ tag });
-        let url = this._parseUri(tag);
-        if (url) {
-            Linking.openURL(url)
-                .catch(err => {
-                    console.warn(err);
-                })
+        let upc = tag.toString(2);
+        if (upc) {
+            // Do stuffs
         }
     }
 
