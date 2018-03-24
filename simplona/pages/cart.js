@@ -90,9 +90,9 @@ export default class AnatomyExample extends Component {
   
   
   render() {
-    let { supported, enabled, tag, isWriting, upc } = this.state;
+    let { supported, enabled, tag, isWriting, upc, selectedApp1, selectedApp2, selectedApp3} = this.state;
     this._startNfc;
-    this._startDetection
+    this._startDetection;
     return (
       <Container>
         <Header>
@@ -107,19 +107,14 @@ export default class AnatomyExample extends Component {
           <Right />
         </Header>
         <Content>
-            <Grid>
-            <Row style={{height: 300}}>
-          {this.renderSelectedApp1()}
-          {this.renderSelectedApp2()}
-          {this.renderSelectedApp3()}
-        </Row>
-            </Grid>
-        </Content>
-
-        <Content>
-            <Button full onPress={this._startDetection}>
+                <Body>
+                    {this.renderSelectedApp1()}
+                    {this.renderSelectedApp2()}
+                    {this.renderSelectedApp3()}
+                    <Button full onPress={this._startDetection}>
                     <Text>Start Tag Detection</Text>
-            </Button>
+                    </Button>
+                </Body>
         </Content>
       </Container>
     );
