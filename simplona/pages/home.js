@@ -17,7 +17,7 @@ export default class AnatomyExample extends Component {
         </Header>
         <Content>
           <Text>
-            This is Content Section
+            This is Home
           </Text>
         </Content>
         <Footer>

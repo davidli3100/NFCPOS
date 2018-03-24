@@ -11,11 +11,11 @@ import Profile from './pages/profile'; // Profile screen
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 
-class BaseInterface extends Component {
+class App extends Component {
   renderSelectedTab () {
     switch (this.state.selectedTab) {
     case 'home':
-    return (<Selling{...this.props}/>);
+    return (<Home{...this.props}/>);
     break;
     case 'deals':
     return (<Deals{...this.props}/>);
@@ -79,7 +79,7 @@ class BaseInterface extends Component {
   }
 }
 
-export default SellerDashboard;
+export default App;
 /*
         <Footer>
           <FooterTab>
