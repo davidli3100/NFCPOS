@@ -14,6 +14,8 @@ import {
 import NfcManager, {NdefParser} from 'react-native-nfc-manager'
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 
+import { Col, Row, Grid } from 'react-native-easy-grid';
+
 import Gum from './gum';
 import Mouse from './mouse';
 import Paper from './paper';
@@ -105,16 +107,19 @@ export default class AnatomyExample extends Component {
           <Right />
         </Header>
         <Content>
-          <Body>
+            <Grid>
+            <Row style={{height: 300}}>
           {this.renderSelectedApp1()}
           {this.renderSelectedApp2()}
           {this.renderSelectedApp3()}
-          
+        </Row>
+            </Grid>
+        </Content>
+
+        <Content>
             <Button full onPress={this._startDetection}>
                     <Text>Start Tag Detection</Text>
             </Button>
-            
-          </Body>
         </Content>
       </Container>
     );
@@ -188,7 +193,7 @@ _onTagDiscovered = tag => {
     this.setState({selectedApp2: upc});
     }
     else if (selectedApp3 != 'none') {
-    this.setState({selectedAp3: upc});
+    this.setState({selectedApp3: upc});
     }
 }
 
