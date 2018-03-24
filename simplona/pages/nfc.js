@@ -122,7 +122,7 @@ class App extends Component {
         }
 
         const urlBytes = strToBytes(upcNumber);
-        const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x55, 0x01];
+        const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x54, 0x00];
         const bytes = [...headerBytes, ...urlBytes];
 
         this.setState({isWriting: true});
