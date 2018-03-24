@@ -18,7 +18,7 @@ class App extends Component {
             supported: true,
             enabled: false,
             isWriting: false,
-            upcNumber: '012546011112',
+            urlToWrite: '012546011112',
             tag: {},
         }
     }
@@ -40,7 +40,7 @@ class App extends Component {
     }
 
     render() {
-        let { supported, enabled, tag, isWriting, upcNumber} = this.state;
+        let { supported, enabled, tag, isWriting, urlToWrite} = this.state;
         return (
             <ScrollView style={{flex: 1}}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -69,8 +69,8 @@ class App extends Component {
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <TextInput
                                     style={{width: 200}}
-                                    value={upcNumber}
-                                    onChangeText={upcNumber => this.setState({ upcNumber })}
+                                    value={urlToWrite}
+                                    onChangeText={urlToWrite => this.setState({ urlToWrite })}
                                 />
                             </View>
 
@@ -116,14 +116,14 @@ class App extends Component {
             return result;
         }
 
-        let {isWriting, upcNumber} = this.state;
+        let {isWriting, urlToWrite} = this.state;
         if (isWriting) {
             return;
         }
 
-        const upcBytes = strToBytes(upcNumber);
-        const headerBytes = [0xD1, 0x01, (upcBytes.length + 1), 0x54, 0x00];
-        const bytes = [...headerBytes, ...upcBytes];
+        const urlBytes = strToBytes(urlToWrite);
+        const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x55, 0x00];
+        const bytes = [...headerBytes, ...urlBytes];
 
         this.setState({isWriting: true});
         NfcManager.requestNdefWrite(bytes)
@@ -198,9 +198,12 @@ class App extends Component {
     _onTagDiscovered = tag => {
         console.log('Tag Discovered', tag);
         this.setState({ tag });
-        let upc = tag.toString(2);
-        if (upc) {
-            console.log("upc" + upc);
+        let url = this._parseUri(tag);
+        if (url) {
+            Linking.openURL(url)
+                .catch(err => {
+                    console.warn(err);
+                })
         }
     }
 
@@ -250,7 +253,7 @@ class App extends Component {
             }
         }
         return null;
-    }
+      }
 }
 
 export default App;

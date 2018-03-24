@@ -25,6 +25,7 @@ class App extends Component {
     break;
     case 'cart':
     return (<Cart{...this.props}/>)
+    break;
     case 'profile':
     return (<Profile{...this.props}/>);
     break;

@@ -13,15 +13,37 @@ import {
 } from 'react-native';
 import NfcManager, {NdefParser} from 'react-native-nfc-manager'
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+
+import Gum from './gum';
+import Mouse from './mouse';
+import Paper from './paper';
+import None from './blank';
+
 export default class AnatomyExample extends Component {
+  renderSelectedApp () {
+    switch (this.state.upc) {
+      case 'gum':
+      return (<Gum{...this.props}/>);
+      break;
+      case 'mouse':
+      return (<Mouse{...this.props}/>);
+      break;
+      case 'paper':
+      return (<Paper{...this.props}/>);
+      break;
+      case 'none':
+      return (<None(...this.props)/>);
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
         supported: true,
         enabled: false,
         tag: {},
-        upc: {}
-    }
+        upc: "none"
+    };
 }
   componentDidMount() {
     NfcManager.isSupported()
@@ -32,8 +54,11 @@ export default class AnatomyExample extends Component {
             }
         })
   }
+
+  
   
   render() {
+    let { supported, enabled, tag, isWriting, upc } = this.state;
     this._startNfc;
     this._startDetection
     return (
@@ -53,83 +78,8 @@ export default class AnatomyExample extends Component {
           <TouchableOpacity style={{ marginTop: 20 }} onPress={this._startDetection}>
             <Text style={{ color: 'blue' }}>Start Tag Detection</Text>
           </TouchableOpacity>
-          <Text>
-            <CardItem>
-              <Left>
-                if(upc == "gum") {
-                <Thumbnail large source={{uri: './assets/gum.png'}} />
-                }
-
-                if(upc == "mouse") {
-                <Thumbnail large source={{uri: './assets/mouse.png'}} />
-                }
-
-                if(upc == "paper") {
-                <Thumbnail large source={{uri: './assets/paper.png'}} />
-                }
-              </Left>
-            </CardItem>
-         
-/* ok so basically we want the upc to be an active service here, when a upc is added it reads upc and then if upc is somethihng
-like gum it'll automatically add a gum card item to descriptors */
-            
-                if (upc == "gum") {
-                  product_info.push(
-                    <div>
-                      <CardItem>
-                        <Left>
-                          <Thumbnail large source={{uri: './assets/gum.jpg'}} />
-                        </Left>
-                      </CardItem>
-                      <CardItem>
-                        <Body>
-                          <Text>Gum</Text>
-                          <Text note>$1.99</Text>
-                        </Body>
-                      </CardItem>
-                    </div>
-                  )
-                 }
-
-                if (upc == "mouse") {
-                  product_info.push(
-                    <div>
-                      <CardItem>
-                        <Left>
-                          <Thumbnail large source={{uri: './assets/mouse.png'}} />
-                        </Left>
-                      </CardItem>
-                      <CardItem>
-                        <Body>
-                          <Text>Mouse</Text>
-                          <Text note>$24.99</Text>
-                        </Body>
-                      </CardItem>
-                    </div>
-                  )
-                }
-
-                if (upc == "paper") {
-                  product_info.push(
-                    <div>
-                      <CardItem>
-                        <Left>
-                          <Thumbnail large source={{uri: './assets/paper.png'}} />
-                        </Left>
-                      </CardItem>
-                      <CardItem>
-                        <Body>
-                          <Text>Paper</Text>
-                          <Text note>$4.99</Text>
-                        </Body>
-                      </CardItem>
-                    </div>
-                  )
-                }
-              
-              {product_info}
-     
-          </Text>
+          
+          {this.renderSelectedApp()}
 
           <Text style={{ marginTop: 20 }}>{`Current tag JSON: ${JSON.stringify(tag)}`}</Text>
           <Text style={{ marginTop: 20 }}>{`UPC: ${JSON.stringify(upc)}`}</Text>
@@ -204,7 +154,8 @@ like gum it'll automatically add a gum card item to descriptors */
 _onTagDiscovered = tag => {
     console.log('Tag Discovered', tag);
     this.setState({ tag });
-    upc = this._parseText(tag);
+    upc = this._parseUri(tag);
+    console.log('UPC', upc )
 }
 
 _startDetection = () => {
@@ -216,7 +167,7 @@ _startDetection = () => {
             console.warn('registerTagEvent fail', error)
         })
 }
-_parseText = (tag) => {
+_parseUri = (tag) => {
   if (tag.ndefMessage) {
       let result = NdefParser.parseUri(tag.ndefMessage[0]),
           uri = result && result.uri;
