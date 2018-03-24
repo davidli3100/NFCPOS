@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { View, Container, Thumbnail, CardItem, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
-export default class AnatomyExample extends Component {
+import { Image } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+export default class CardImageExample extends Component {
   render() {
     return (
       <Container>
         <Content>
-            <View>
-                <CardItem>
-                <Left>
-                    <Thumbnail large source={{uri: './assets/gum.jpg'}} />
-                </Left>
-                </CardItem>
-                <CardItem>
+          <Card>
+            <CardItem>
+              <Left>
                 <Body>
-                    <Text>Gum</Text>
-                    <Text note>$1.99</Text>
+                  <Text>Gum</Text>
+                  <Text note>$1.99</Text>
                 </Body>
-                </CardItem>
-            </View>
+              </Left>
+            </CardItem>
+            <CardItem cardBody>
+                <Image source={require('./assets/gum.jpg')} style={{  resizeMode: 'cover', height: 250, width: null, flex: 1 }} />
+           </CardItem>
+          </Card>
         </Content>
       </Container>
     );

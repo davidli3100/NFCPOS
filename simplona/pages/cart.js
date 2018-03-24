@@ -75,22 +75,17 @@ export default class AnatomyExample extends Component {
           <Right />
         </Header>
         <Content>
-          <TouchableOpacity style={{ marginTop: 20 }} onPress={this._startDetection}>
-            <Text style={{ color: 'blue' }}>Start Tag Detection</Text>
-          </TouchableOpacity>
           
           {this.renderSelectedApp()}
 
-          <Text style={{ marginTop: 20 }}>{`Current tag JSON: ${JSON.stringify(tag)}`}</Text>
-          <Text style={{ marginTop: 20 }}>{`UPC: ${JSON.stringify(upc)}`}</Text>
+          
         </Content>
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>Footer</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
+        <Content>
+        <Button full onPress={this._startDetection}>
+                <Text>Start Tag Detection</Text>
+        </Button>
+        <Text style={{ marginTop: 20 }}>{`Current tag JSON: ${JSON.stringify(tag)}`}</Text>
+        </Content>
       </Container>
     );
   }
