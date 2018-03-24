@@ -12,7 +12,7 @@ import {
   Thumbnail
 } from 'react-native';
 import NfcManager, {NdefParser} from 'react-native-nfc-manager'
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import { Card, Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 
 import Gum from './gum';
 import Mouse from './mouse';
@@ -20,21 +20,69 @@ import Paper from './paper';
 import None from './blank';
 
 export default class AnatomyExample extends Component {
-  renderSelectedApp () {
-    switch (this.state.selectedApp) {
-      case 'gum':
-      return (<Gum{...this.props}/>);
-      break;
-      case 'mouse':
-      return (<Mouse{...this.props}/>);
-      break;
-      case 'paper':
-      return (<Paper{...this.props}/>);
-      break;
-      case 'none':
-      return (<None{...this.props}/>);
+    renderSelectedApp (selectedApp) {
+        switch (this.state.selectedApp) {
+          case 'gum':
+          return (<Mouse{...this.props}/>);
+          break;
+          case 'mouse':
+          return (<Mouse{...this.props}/>);
+          break;
+          case 'paper':
+          return (<Paper{...this.props}/>);
+          break;
+          case 'none':
+          return (<None{...this.props}/>);
+          
+        }
+      }
+      renderNewItem () {
+        switch (this.state.selectedApp) {
+            case 'gum':
+            return (<Mouse{...this.props}/>);
+            break;
+            case 'mouse':
+            return (<Mouse{...this.props}/>);
+            break;
+            case 'paper':
+            return (<Paper{...this.props}/>);
+            break;
+            case 'none':
+            return (<None{...this.props}/>);
+        this.push({
+        selectedApp: upc
+        })
+        }
+      renderSelectedApp2 () {
+        switch (this.state.selectedApp2) {
+          case 'gum':
+          return (<Mouse{...this.props}/>);
+          break;
+          case 'mouse':
+          return (<Mouse{...this.props}/>);
+          break;
+          case 'paper':
+          return (<Paper{...this.props}/>);
+          break;
+          case 'none':
+          return (<None{...this.props}/>);
+        }
+      }
+      renderSelectedApp3 () {
+        switch (this.state.selectedApp3) {
+          case 'gum':
+          return (<Mouse{...this.props}/>);
+          break;
+          case 'mouse':
+          return (<Mouse{...this.props}/>);
+          break;
+          case 'paper':
+          return (<Paper{...this.props}/>);
+          break;
+          case 'none':
+          return (<None{...this.props}/>);
+        }
     }
-  }
 
   constructor(props) {
     super(props);
@@ -54,7 +102,7 @@ export default class AnatomyExample extends Component {
             }
         })
   }
-
+ 
   
   
   render() {
@@ -75,16 +123,14 @@ export default class AnatomyExample extends Component {
           <Right />
         </Header>
         <Content>
-          
-          {this.renderSelectedApp()}
-
-          
+        {this.renderSelectedApp()}
+               
+        
         </Content>
         <Content>
-        <Button full onPress={this._startDetection}>
+        <Button style={{flexGrow: 1, alignContent: 'flex-end'}} full onPress={this._startDetection}>
                 <Text>Start Tag Detection</Text>
         </Button>
-        <Text style={{ marginTop: 20 }}>{`Current tag JSON: ${JSON.stringify(tag)}`}</Text>
         </Content>
       </Container>
     );
@@ -151,7 +197,7 @@ _onTagDiscovered = tag => {
     this.setState({ tag });
     upc = this._parseUri(tag);
     console.log('UPC', upc )
-    this.setState({selectedApp: upc});
+    this.renderNewItem();
 }
 
 _startDetection = () => {
