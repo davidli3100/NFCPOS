@@ -47,7 +47,7 @@ like gum it'll automatically add a gum card item to descriptors */
                   product_info.push(
                     <CardItem>
                       <Left>
-                      <Thumbnail large source={{uri: './assets/gum.png'}} />
+                      <Thumbnail large source={{uri: './assets/gum.jpg'}} />
                       </Left>
                     </CardItem>
                   <CardItem>
