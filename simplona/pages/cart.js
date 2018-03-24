@@ -12,7 +12,7 @@ import {
   Thumbnail
 } from 'react-native';
 import NfcManager, {NdefParser} from 'react-native-nfc-manager'
-import { Card, Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 
 import Gum from './gum';
 import Mouse from './mouse';
@@ -20,8 +20,8 @@ import Paper from './paper';
 import None from './blank';
 
 export default class AnatomyExample extends Component {
-    renderSelectedApp (selectedApp) {
-        switch (this.state.selectedApp) {
+    renderSelectedApp1 () {
+        switch (this.state.selectedApp1) {
           case 'gum':
           return (<Mouse{...this.props}/>);
           break;
@@ -33,26 +33,8 @@ export default class AnatomyExample extends Component {
           break;
           case 'none':
           return (<None{...this.props}/>);
-          
         }
       }
-      renderNewItem () {
-        switch (this.state.selectedApp) {
-            case 'gum':
-            return (<Mouse{...this.props}/>);
-            break;
-            case 'mouse':
-            return (<Mouse{...this.props}/>);
-            break;
-            case 'paper':
-            return (<Paper{...this.props}/>);
-            break;
-            case 'none':
-            return (<None{...this.props}/>);
-        this.push({
-        selectedApp: upc
-        })
-        }
       renderSelectedApp2 () {
         switch (this.state.selectedApp2) {
           case 'gum':
@@ -102,7 +84,7 @@ export default class AnatomyExample extends Component {
             }
         })
   }
- 
+
   
   
   render() {
@@ -123,9 +105,11 @@ export default class AnatomyExample extends Component {
           <Right />
         </Header>
         <Content>
-        {this.renderSelectedApp()}
-               
-        
+
+        {this.renderSelectedApp1()}
+        {this.renderSelectedApp2()}
+        {this.renderSelectedApp3()}
+          
         </Content>
         <Content>
         <Button style={{flexGrow: 1, alignContent: 'flex-end'}} full onPress={this._startDetection}>
@@ -197,7 +181,15 @@ _onTagDiscovered = tag => {
     this.setState({ tag });
     upc = this._parseUri(tag);
     console.log('UPC', upc )
-    this.renderNewItem();
+    if (this.selectedApp1 != 'none') {
+    this.setState({selectedApp1: upc});
+    }
+    else if (this.selectedApp2 != 'none') {
+    this.setState({selectedApp2: upc});
+    }
+    else if (this.selectedApp3 != 'none') {
+    this.setState({selectedApp3: upc});
+}
 }
 
 _startDetection = () => {
