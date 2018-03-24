@@ -22,40 +22,10 @@ import Paper from './paper';
 import None from './blank';
 
 export default class AnatomyExample extends Component {
-  renderSelectedApp1 () {
-    switch (this.state.selectedApp1) {
+  renderSelectedApp () {
+    switch (this.state.selectedApp) {
       case 'gum':
-      return (<Mouse{...this.props}/>);
-      break;
-      case 'mouse':
-      return (<Mouse{...this.props}/>);
-      break;
-      case 'paper':
-      return (<Paper{...this.props}/>);
-      break;
-      case 'none':
-      return (<None{...this.props}/>);
-    }
-  }
-  renderSelectedApp2 () {
-    switch (this.state.selectedApp2) {
-      case 'gum':
-      return (<Mouse{...this.props}/>);
-      break;
-      case 'mouse':
-      return (<Mouse{...this.props}/>);
-      break;
-      case 'paper':
-      return (<Paper{...this.props}/>);
-      break;
-      case 'none':
-      return (<None{...this.props}/>);
-    }
-  }
-  renderSelectedApp3 () {
-    switch (this.state.selectedApp3) {
-      case 'gum':
-      return (<Mouse{...this.props}/>);
+      return (<Gum{...this.props}/>);
       break;
       case 'mouse':
       return (<Mouse{...this.props}/>);
@@ -107,6 +77,7 @@ export default class AnatomyExample extends Component {
           <Right />
         </Header>
         <Content>
+<<<<<<< HEAD
                 <Body>
                     {this.renderSelectedApp1()}
                     {this.renderSelectedApp2()}
@@ -115,6 +86,18 @@ export default class AnatomyExample extends Component {
                     <Text>Start Tag Detection</Text>
                     </Button>
                 </Body>
+=======
+          
+          {this.renderSelectedApp()}
+
+          
+        </Content>
+        <Content>
+        <Button full onPress={this._startDetection}>
+                <Text>Start Tag Detection</Text>
+        </Button>
+        <Text style={{ marginTop: 20 }}>{`Current tag JSON: ${JSON.stringify(tag)}`}</Text>
+>>>>>>> parent of 6ce277d... styling and cart changes
         </Content>
       </Container>
     );
@@ -181,6 +164,7 @@ _onTagDiscovered = tag => {
     this.setState({ tag });
     upc = this._parseUri(tag);
     console.log('UPC', upc )
+<<<<<<< HEAD
     if (selectedApp1 != 'none') {
     this.setState({selectedApp1: upc});
     }
@@ -190,6 +174,9 @@ _onTagDiscovered = tag => {
     else if (selectedApp3 != 'none') {
     this.setState({selectedApp3: upc});
     }
+=======
+    this.setState({selectedApp: upc});
+>>>>>>> parent of 6ce277d... styling and cart changes
 }
 
 _startDetection = () => {
