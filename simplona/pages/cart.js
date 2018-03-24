@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import {ToastAndroid} from "react-native";
 import { Image } from 'react-native';
-import NfcManager, {NdefParser} from 'react-native-manager';
+import {
+  View,
+  Platform,
+  TouchableOpacity,
+  Linking,
+  TextInput,
+  ScrollView,
+  CardItem,
+  Thumbnail
+} from 'react-native';
+import NfcManager, {NdefParser} from 'react-native-nfc-manager'
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 export default class AnatomyExample extends Component {
   constructor(props) {
@@ -44,7 +54,6 @@ export default class AnatomyExample extends Component {
             <Text style={{ color: 'blue' }}>Start Tag Detection</Text>
           </TouchableOpacity>
           <Text>
-            /*
             <CardItem>
               <Left>
                 if(upc == "gum") {
@@ -66,55 +75,60 @@ like gum it'll automatically add a gum card item to descriptors */
             
                 if (upc == "gum") {
                   product_info.push(
-                    <CardItem>
-                      <Left>
-                      <Thumbnail large source={{uri: './assets/gum.jpg'}} />
-                      </Left>
-                    </CardItem>
-                    <CardItem>
-                      <Body>
-                        <Text>Gum</Text>
-                        <Text note>$1.99</Text>
-                      </Body>
-                    </CardItem>
+                    <div>
+                      <CardItem>
+                        <Left>
+                          <Thumbnail large source={{uri: './assets/gum.jpg'}} />
+                        </Left>
+                      </CardItem>
+                      <CardItem>
+                        <Body>
+                          <Text>Gum</Text>
+                          <Text note>$1.99</Text>
+                        </Body>
+                      </CardItem>
+                    </div>
                   )
                  }
 
                 if (upc == "mouse") {
                   product_info.push(
-                    <CardItem>
-                    <Left>
-                    <Thumbnail large source={{uri: './assets/mouse.png'}} />
-                    </Left>
-                  </CardItem>
-                  <CardItem>
-                  <Body>
-                <Text>Mouse</Text>
-                <Text note>$24.99</Text>
-                </Body>
-                </CardItem>
+                    <div>
+                      <CardItem>
+                        <Left>
+                          <Thumbnail large source={{uri: './assets/mouse.png'}} />
+                        </Left>
+                      </CardItem>
+                      <CardItem>
+                        <Body>
+                          <Text>Mouse</Text>
+                          <Text note>$24.99</Text>
+                        </Body>
+                      </CardItem>
+                    </div>
                   )
                 }
 
                 if (upc == "paper") {
                   product_info.push(
-                    <CardItem>
-                    <Left>
-                    <Thumbnail large source={{uri: './assets/paper.png'}} />
-                    </Left>
-                  </CardItem>
-                  <CardItem>
-                  <Body>
-                <Text>Paper</Text>
-                <Text note>$4.99</Text>
-                </Body>
-                </CardItem>
+                    <div>
+                      <CardItem>
+                        <Left>
+                          <Thumbnail large source={{uri: './assets/paper.png'}} />
+                        </Left>
+                      </CardItem>
+                      <CardItem>
+                        <Body>
+                          <Text>Paper</Text>
+                          <Text note>$4.99</Text>
+                        </Body>
+                      </CardItem>
+                    </div>
                   )
                 }
               
               {product_info}
      
-    */
           </Text>
 
           <Text style={{ marginTop: 20 }}>{`Current tag JSON: ${JSON.stringify(tag)}`}</Text>

@@ -9,7 +9,7 @@ import {
     TextInput,
     ScrollView,
 } from 'react-native';
-import NfcManager, {NdefParser} from 'react-native-manager';
+import NfcManager, {NdefParser} from 'react-native-nfc-manager'
 
 class App extends Component {
     constructor(props) {
