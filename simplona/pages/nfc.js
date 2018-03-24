@@ -18,7 +18,7 @@ class App extends Component {
             supported: true,
             enabled: false,
             isWriting: false,
-            urlToWrite: 'google.com',
+            upcNumber: '012546011112',
             tag: {},
         }
     }
@@ -40,7 +40,7 @@ class App extends Component {
     }
 
     render() {
-        let { supported, enabled, tag, isWriting, urlToWrite} = this.state;
+        let { supported, enabled, tag, isWriting, upcNumber} = this.state;
         return (
             <ScrollView style={{flex: 1}}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -48,7 +48,7 @@ class App extends Component {
                     <Text>{`Is NFC enabled (Android only)? ${enabled}`}</Text>
 
                     <TouchableOpacity style={{ marginTop: 20 }} onPress={this._startDetection}>
-                        <Text style={{ color: 'blue' }}>Start Tag Detection</Text>
+                        <Text style={{ color: 'blue' }}>Detect Tags</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{ marginTop: 20 }} onPress={this._stopDetection}>
@@ -67,11 +67,10 @@ class App extends Component {
                         <View style={{padding: 10, marginTop: 20, backgroundColor: '#e0e0e0'}}>
                             <Text>(android) Write NDEF Test</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text>http://www.</Text>
                                 <TextInput
                                     style={{width: 200}}
-                                    value={urlToWrite}
-                                    onChangeText={urlToWrite => this.setState({ urlToWrite })}
+                                    value={upcNumber}
+                                    onChangeText={upcNumber => this.setState({ upcNumber })}
                                 />
                             </View>
 
@@ -117,14 +116,14 @@ class App extends Component {
             return result;
         }
 
-        let {isWriting, urlToWrite} = this.state;
+        let {isWriting, upcNumber} = this.state;
         if (isWriting) {
             return;
         }
 
-        const urlBytes = strToBytes(urlToWrite);
-        const headerBytes = [0xD1, 0x01, (urlBytes.length + 1), 0x55, 0x01];
-        const bytes = [...headerBytes, ...urlBytes];
+        const upcBytes = strToBytes(upcNumber);
+        const headerBytes = [0xD1, 0x01, (upcBytes.length + 1), 0x54, 0x00];
+        const bytes = [...headerBytes, ...upcBytes];
 
         this.setState({isWriting: true});
         NfcManager.requestNdefWrite(bytes)
@@ -199,12 +198,9 @@ class App extends Component {
     _onTagDiscovered = tag => {
         console.log('Tag Discovered', tag);
         this.setState({ tag });
-        let url = this._parseUri(tag);
-        if (url) {
-            Linking.openURL(url)
-                .catch(err => {
-                    console.warn(err);
-                })
+        let upc = tag.toString(2);
+        if (upc) {
+            console.log("upc" + upc);
         }
     }
 
