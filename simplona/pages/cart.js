@@ -23,7 +23,7 @@ export default class AnatomyExample extends Component {
     renderSelectedApp1 () {
         switch (this.state.selectedApp1) {
           case 'gum':
-          return (<Mouse{...this.props}/>);
+          return (<Gum{...this.props}/>);
           break;
           case 'mouse':
           return (<Mouse{...this.props}/>);
@@ -38,7 +38,7 @@ export default class AnatomyExample extends Component {
       renderSelectedApp2 () {
         switch (this.state.selectedApp2) {
           case 'gum':
-          return (<Mouse{...this.props}/>);
+          return (<Gum{...this.props}/>);
           break;
           case 'mouse':
           return (<Mouse{...this.props}/>);
@@ -53,7 +53,7 @@ export default class AnatomyExample extends Component {
       renderSelectedApp3 () {
         switch (this.state.selectedApp3) {
           case 'gum':
-          return (<Mouse{...this.props}/>);
+          return (<Gum{...this.props}/>);
           break;
           case 'mouse':
           return (<Mouse{...this.props}/>);
@@ -115,6 +115,12 @@ export default class AnatomyExample extends Component {
         <Button style={{flexGrow: 1, alignContent: 'flex-end'}} full onPress={this._startDetection}>
                 <Text>Start Tag Detection</Text>
         </Button>
+
+        
+        <Button style={{flexGrow: 1, alignContent: 'flex-end'}} full success onPress={() => Linking.openURL('http://simplona.myshopify.com/cart/719429599276:1')}>
+                <Text>Checkout</Text>
+        </Button>
+        
         </Content>
       </Container>
     );
@@ -180,6 +186,7 @@ _onTagDiscovered = tag => {
     console.log('Tag Discovered', tag);
     this.setState({ tag });
     upc = this._parseUri(tag);
+
     console.log('UPC', upc )
     if (this.selectedApp1 != 'none') {
     this.setState({selectedApp1: upc});
