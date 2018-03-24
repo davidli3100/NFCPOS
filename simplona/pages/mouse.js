@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import { View, Container, Thumbnail, CardItem, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 export default class AnatomyExample extends Component {
   render() {
     return (
       <Container>
         <Content>
-        <Text>
-            <div>
+            <View>
                 <CardItem>
                 <Left>
                     <Thumbnail large source={{uri: './assets/mouse.png'}} />
@@ -18,8 +17,7 @@ export default class AnatomyExample extends Component {
                     <Text note>$24.99</Text>
                 </Body>
                 </CardItem>
-            </div>
-        </Text>
+            </View>
         </Content>
       </Container>
     );

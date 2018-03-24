@@ -21,7 +21,7 @@ import None from './blank';
 
 export default class AnatomyExample extends Component {
   renderSelectedApp () {
-    switch (this.state.upc) {
+    switch (this.state.selectedApp) {
       case 'gum':
       return (<Gum{...this.props}/>);
       break;
@@ -32,7 +32,7 @@ export default class AnatomyExample extends Component {
       return (<Paper{...this.props}/>);
       break;
       case 'none':
-      return (<None(...this.props)/>);
+      return (<None{...this.props}/>);
     }
   }
 
@@ -156,6 +156,7 @@ _onTagDiscovered = tag => {
     this.setState({ tag });
     upc = this._parseUri(tag);
     console.log('UPC', upc )
+    this.setState({selectedApp: upc});
 }
 
 _startDetection = () => {
