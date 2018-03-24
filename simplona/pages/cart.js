@@ -37,7 +37,19 @@ export default class AnatomyExample extends Component {
         }
       }
       renderNewItem () {
-        this.renderSelectedApp.push({
+        switch (this.state.selectedApp) {
+            case 'gum':
+            return (<Mouse{...this.props}/>);
+            break;
+            case 'mouse':
+            return (<Mouse{...this.props}/>);
+            break;
+            case 'paper':
+            return (<Paper{...this.props}/>);
+            break;
+            case 'none':
+            return (<None{...this.props}/>);
+        this.push({
         selectedApp: upc
         })
         }
