@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {ToastAndroid} from "react-native";
 import { Image } from 'react-native';
-import NFC, {NfcDataType, NdefRecordType} from "react-native-nfc";
-import NfcManager, {NdefParser} from 'react-native-nfc-manager';
-import './nfc.js';
+import NfcManager, {NdefParser} from 'react-native-manager';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 export default class AnatomyExample extends Component {
   constructor(props) {
