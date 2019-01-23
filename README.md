@@ -7,7 +7,7 @@ A Point of Sales system using NFC technology to provide a superior shopping expe
 ### Ahmed Moselhi -
 ### Amruth HB -
 ### Aryan Arora -
-### David Li - Product Manager, Solutions Architect
+### David Li - Developer
 ### Ivy Deng -
 ### Jason Huang - Mobile App Developer, UI Designer
 
